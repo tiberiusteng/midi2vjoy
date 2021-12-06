@@ -1,0 +1,4 @@
+pyvjoy
+mido
+loguru
+python-rtmidi

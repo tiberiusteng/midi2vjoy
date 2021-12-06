@@ -1,0 +1,43 @@
+{
+  "input": "X-TOUCH MINI",
+  "output": "X-TOUCH MINI",
+  "mapping": [
+    { "channel": 10, "control": 110, "type": "pad", "vjoy-btn": 1 },
+    { "channel": 10, "control": 111, "type": "pad", "vjoy-btn": 2 },
+    { "channel": 10, "control": 112, "type": "pad", "vjoy-btn": 3 },
+    { "channel": 10, "control": 113, "type": "pad", "vjoy-btn": 4 },
+    { "channel": 10, "control": 114, "type": "pad", "vjoy-btn": 5 },
+    { "channel": 10, "control": 115, "type": "pad", "vjoy-btn": 6 },
+    { "channel": 10, "control": 116, "type": "pad", "vjoy-btn": 7 },
+    { "channel": 10, "control": 117, "type": "pad", "vjoy-btn": 8 },
+    { "channel": 10, "control": 118, "type": "pad", "vjoy-btn": 9 },
+    { "channel": 10, "control": 119, "type": "pad", "vjoy-btn": 10 },
+    { "channel": 10, "control": 120, "type": "pad", "vjoy-btn": 11 },
+    { "channel": 10, "control": 121, "type": "pad", "vjoy-btn": 12 },
+    { "channel": 10, "control": 122, "type": "pad", "vjoy-btn": 13 },
+    { "channel": 10, "control": 123, "type": "pad", "vjoy-btn": 14 },
+    { "channel": 10, "control": 124, "type": "pad", "vjoy-btn": 15 },
+    { "channel": 10, "control": 125, "type": "pad", "vjoy-btn": 16 },
+
+    { "channel": 10, "control": 91, "type": "push", "vjoy-btn": 17 },
+    { "channel": 10, "control": 92, "type": "push", "vjoy-btn": 18 },
+    { "channel": 10, "control": 93, "type": "push", "vjoy-btn": 19 },
+    { "channel": 10, "control": 94, "type": "push", "vjoy-btn": 20 },
+    { "channel": 10, "control": 95, "type": "push", "vjoy-btn": 21 },
+    { "channel": 10, "control": 96, "type": "push", "vjoy-btn": 22 },
+    { "channel": 10, "control": 97, "type": "push", "vjoy-btn": 23 },
+    { "channel": 10, "control": 98, "type": "push", "vjoy-btn": 24 },
+
+    { "channel": 10, "control": 100, "type": "rotary", "initial-value": 64, "vjoy-btn-dec": 25, "vjoy-btn-inc": 26},
+    { "channel": 10, "control": 101, "type": "rotary", "initial-value": 64, "vjoy-btn-dec": 27, "vjoy-btn-inc": 28},
+    { "channel": 10, "control": 102, "type": "rotary", "initial-value": 64, "vjoy-btn-dec": 29, "vjoy-btn-inc": 30, "activation-duration": 0.02},
+    { "channel": 10, "control": 103, "type": "rotary", "initial-value": 64, "vjoy-btn-dec": 31, "vjoy-btn-inc": 32, "activation-duration": 0.02},
+    { "channel": 10, "control": 104, "type": "rotary", "initial-value": 64, "vjoy-btn-dec": 33, "vjoy-btn-inc": 34, "activation-duration": 0.02},
+
+    { "channel": 10, "control": 105, "type": "axis", "initial-value": 64, "axis-name": "X"},
+    { "channel": 10, "control": 106, "type": "axis", "initial-value": 64, "axis-name": "Y"},
+    { "channel": 10, "control": 107, "type": "axis", "initial-value": 64, "axis-name": "Z"},
+
+    { "channel": 10, "control": 90, "type": "slider", "axis-name": "SL0"}
+  ]
+}
