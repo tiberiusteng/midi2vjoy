@@ -24,7 +24,7 @@ For sure is not the default configuration, don't expect to make it work without 
 
 # vJoy config for x-touch mini
 
-![vJoy conf for x-touch mini](./img/vJorConf.png)
+![vJoy conf for x-touch mini](./img/vJoy-conf.png)
 
 # how to run and test it ?
 
@@ -37,6 +37,8 @@ like so :
 python.exe midi2vjoy.py --config ./xtouch-mini.json
 ```
 full path is preferred, specially if you want to run it with un shortcut.
+
+![Command line](./img/midi2vjoy-command-line.png)
 
 and testing it is easy with vJoy Monitor.
 
