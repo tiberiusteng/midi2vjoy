@@ -22,6 +22,14 @@ You will need some skill for it, you need to earn it.
 My x-touch mini is configured to behave like a keyboard, or drum, it plays a note on a tap of a button
 For sure is not the default configuration, don't expect to make it work without configure yours
 
+# configure your x-touch mini
+
+First if you want to try it without problem you can load layer file `xtouch-layer.bin` to your x-touch mini using x-touch editor.
+
+Make sure you do a backup of you existing layer, in case you want to roll back.
+
+Only one layer is configured as all CC momentary, and only 4 pad close to the slider as toggle.
+
 # vJoy config for x-touch mini
 
 ![vJoy conf for x-touch mini](./img/vJoy-conf.png)
