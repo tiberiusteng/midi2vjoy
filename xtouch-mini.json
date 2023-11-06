@@ -28,11 +28,11 @@
     { "channel": 10, "control": 97, "type": "push", "vjoy-btn": 23 },
     { "channel": 10, "control": 98, "type": "push", "vjoy-btn": 24 },
 
-    { "channel": 10, "control": 100, "type": "rotary", "initial-value": 64, "vjoy-btn-dec": 25, "vjoy-btn-inc": 26, "activation-duration": 0.05},
-    { "channel": 10, "control": 101, "type": "rotary", "initial-value": 64, "vjoy-btn-dec": 27, "vjoy-btn-inc": 28, "activation-duration": 0.05},
-    { "channel": 10, "control": 102, "type": "rotary", "initial-value": 64, "vjoy-btn-dec": 29, "vjoy-btn-inc": 30, "activation-duration": 0.05},
-    { "channel": 10, "control": 103, "type": "rotary", "initial-value": 64, "vjoy-btn-dec": 31, "vjoy-btn-inc": 32, "activation-duration": 0.05},
-    { "channel": 10, "control": 104, "type": "rotary", "initial-value": 64, "vjoy-btn-dec": 33, "vjoy-btn-inc": 34, "activation-duration": 0.05},
+    { "channel": 10, "control": 100, "type": "rotary", "vjoy-btn-dec": 25, "vjoy-btn-inc": 26, "activation-duration": 0.15},
+    { "channel": 10, "control": 101, "type": "rotary", "vjoy-btn-dec": 27, "vjoy-btn-inc": 28, "activation-duration": 0.15},
+    { "channel": 10, "control": 102, "type": "rotary", "vjoy-btn-dec": 29, "vjoy-btn-inc": 30, "activation-duration": 0.15},
+    { "channel": 10, "control": 103, "type": "rotary", "vjoy-btn-dec": 31, "vjoy-btn-inc": 32, "activation-duration": 0.15},
+    { "channel": 10, "control": 104, "type": "rotary", "vjoy-btn-dec": 33, "vjoy-btn-inc": 34, "activation-duration": 0.15},
 
     { "channel": 10, "control": 105, "type": "axis", "initial-value": 64, "axis-name": "X"},
     { "channel": 10, "control": 106, "type": "axis", "initial-value": 64, "axis-name": "Y"},
