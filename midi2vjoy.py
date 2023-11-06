@@ -66,7 +66,7 @@ class Midi2vJoy(threading.Thread):
         with open(self.config_filename, "r") as f:
             config = json.load(f)
             self.mapping = config['mapping']
-        logger.debug(config)
+        logger.debug(f"Loading config file : {self.config_filename}")
 
         input_midi_name = resolve_midi_name(config['input'], mido.get_input_names())
         output_midi_name = resolve_midi_name(config['output'], mido.get_output_names())
@@ -119,15 +119,43 @@ class Midi2vJoy(threading.Thread):
 
 def parse_args(args):
     parser = argparse.ArgumentParser()
-    parser.add_argument('--config', dest='config', help='mapping.json', required=True)
+    parser.add_argument('--config,c', dest='config', help='mapping.json')
+    parser.add_argument('--test,t', dest='test', action="store_true", help='display midi devices list and display live messages')
     return parser.parse_args(args)
 
 
 def main(args):
     args_parsed = parse_args(args)
-    m = Midi2vJoy(args_parsed.config)
-    m.start()
+    if args_parsed.test:
+        inputs = mido.get_input_names()
+        logger.debug("Inputs : ")
+        for index, name in enumerate(inputs):
+            logger.debug(f'\t[{index}] : "{name}"')
+        
+        outputs = mido.get_output_names()
+        logger.debug("Ouputs : ")
+        for index, name in enumerate(outputs):
+            logger.debug(f'\t[{index}] : "{name}"')
 
+        wanted_input = None
+        while wanted_input == None:
+            try: 
+                a = input("Which input do you want to test ? : ") or 0
+                wanted_input = inputs[int(a)]
+            except:
+                pass
+
+        def callback_midi_message_debug(msg):
+            logger.debug(msg)
+
+        logger.debug(f"Starting to log every midi form {wanted_input}")
+        inport = mido.open_input(name=wanted_input, callback=callback_midi_message_debug)
+        
+        while True:
+            time.sleep(2)
+    else:
+        m = Midi2vJoy(args_parsed.config)
+        m.start()
 
 if __name__ == "__main__":
     main(sys.argv[1:])
