@@ -91,23 +91,29 @@ class Midi2vJoy(threading.Thread):
                 if btn['type'] == 'pad' or btn['type'] == 'push':
                     simulate_vjoy_btn_change(btn['vjoy-btn'], msg.value > 64)
                 elif btn['type'] == 'rotary':
-                    if msg.value > btn['value']:
-                        simulate_vjoy_push_btn(btn['vjoy-btn-inc'],
-                                               activation_duration=btn['activation-duration'] if 'activation-duration' in btn else None)
+                    activation_duration=btn['activation-duration'] if 'activation-duration' in btn else None
+                    if msg.value > 0:
+                        simulate_vjoy_push_btn(btn['vjoy-btn-inc'], activation_duration)
                     else:
-                        simulate_vjoy_push_btn(btn['vjoy-btn-dec'],
-                                               activation_duration=btn['activation-duration'] if 'activation-duration' in btn else None)
-                    btn['value'] = msg.value
+                        simulate_vjoy_push_btn(btn['vjoy-btn-dec'], activation_duration)
+                    msg.value = 0
+                    self.outport.send(msg)
                 elif btn['type'] == 'slider' or btn['type'] == 'axis':
                     simulate_vjoy_slide(btn['axis-name'], msg.value)
 
     def load_initial_values(self):
         for m in self.mapping:
+            initial_value = 0
             if 'initial-value' in m and 'channel' in m:
-                msg = mido.Message(type='control_change', channel=m['channel'],
-                                   control=m['control'], value=m['initial-value'])
-                m['value'] = m.pop('initial-value')
-                self.outport.send(msg)
+                initial_value = m.pop('initial-value')
+            
+            msg = mido.Message(type='control_change', channel=m['channel'],
+                                control=m['control'], value=initial_value)
+            self.outport.send(msg)
+
+            if m['type'] == 'slider' or m['type'] == 'axis':
+                simulate_vjoy_slide(m['axis-name'], initial_value)
+
         logger.debug('Initial values are loaded successfully')
 
 
