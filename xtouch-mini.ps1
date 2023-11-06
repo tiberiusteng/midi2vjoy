@@ -1,0 +1,1 @@
+python midi2vjoy.py --config .\xtouch-mini.json
