@@ -22,6 +22,11 @@ def search_button(ctr, mapping):
     except IndexError:
         return None
 
+def search_note(note, mapping):
+    try:
+        return [element for element in mapping if element['note'] == note][0]
+    except IndexError:
+        return None
 
 def resolve_midi_name(midi_name_start_with, possible_names):
     midi_name = None
@@ -85,21 +90,29 @@ class Midi2vJoy(threading.Thread):
     def callback_midi_message(self, msg):
         logger.debug(msg)
         if type(msg) is mido.Message:
-            btn = search_button(msg.control, self.mapping)
-            if btn:
-                logger.debug(btn)
-                if btn['type'] == 'pad' or btn['type'] == 'push':
-                    simulate_vjoy_btn_change(btn['vjoy-btn'], msg.value > 64)
-                elif btn['type'] == 'rotary':
-                    activation_duration=btn['activation-duration'] if 'activation-duration' in btn else None
-                    if msg.value > 0:
-                        simulate_vjoy_push_btn(btn['vjoy-btn-inc'], activation_duration)
+            if msg.note:
+                btn = search_note(msg.note, self.mapping)
+                if btn:
+                    if msg.type == 'note_on':
+                        simulate_vjoy_btn_change(btn['vjoy-btn'], msg.velocity > 0)
                     else:
-                        simulate_vjoy_push_btn(btn['vjoy-btn-dec'], activation_duration)
-                    msg.value = 0
-                    self.outport.send(msg)
-                elif btn['type'] == 'slider' or btn['type'] == 'axis':
-                    simulate_vjoy_slide(btn['axis-name'], msg.value)
+                        simulate_vjoy_btn_change(btn['vjoy-btn'], False)
+            else:
+                btn = search_button(msg.control, self.mapping)
+                if btn:
+                    logger.debug(btn)
+                    if btn['type'] == 'pad' or btn['type'] == 'push':
+                        simulate_vjoy_btn_change(btn['vjoy-btn'], msg.value > 64)
+                    elif btn['type'] == 'rotary':
+                        activation_duration=btn['activation-duration'] if 'activation-duration' in btn else None
+                        if msg.value > 0:
+                            simulate_vjoy_push_btn(btn['vjoy-btn-inc'], activation_duration)
+                        else:
+                            simulate_vjoy_push_btn(btn['vjoy-btn-dec'], activation_duration)
+                        msg.value = 0
+                        self.outport.send(msg)
+                    elif btn['type'] == 'slider' or btn['type'] == 'axis':
+                        simulate_vjoy_slide(btn['axis-name'], msg.value)
 
     def load_initial_values(self):
         for m in self.mapping:
@@ -107,11 +120,12 @@ class Midi2vJoy(threading.Thread):
             if 'initial-value' in m and 'channel' in m:
                 initial_value = m.pop('initial-value')
             
-            msg = mido.Message(type='control_change', channel=m['channel'],
-                                control=m['control'], value=initial_value)
-            self.outport.send(msg)
+            if m.get('control'):
+                msg = mido.Message(type='control_change', channel=m['channel'],
+                                    control=m['control'], value=initial_value)
+                self.outport.send(msg)
 
-            if m['type'] == 'slider' or m['type'] == 'axis':
+            if m.get('type') == 'slider' or m.get('type') == 'axis':
                 simulate_vjoy_slide(m['axis-name'], initial_value)
 
         logger.debug('Initial values are loaded successfully')
